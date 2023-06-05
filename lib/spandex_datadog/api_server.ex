@@ -327,6 +327,8 @@ defmodule SpandexDatadog.ApiServer do
   @spec add_error_stacktrace(map, list | nil) :: map
   defp add_error_stacktrace(meta, nil), do: meta
 
+  defp add_error_stacktrace(meta, {:stacktrace, stacktrace}), do: add_error_stacktrace(meta, stacktrace)
+
   defp add_error_stacktrace(meta, stacktrace),
     do: Map.put(meta, "error.stack", Exception.format_stacktrace(stacktrace))
 
